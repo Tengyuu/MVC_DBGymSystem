@@ -1,0 +1,107 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>大無限健身首頁</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="relative min-h-screen font-sans overflow-x-hidden">
+    <!-- 背景黑紅漸層與光暈 -->
+    <div class="fixed inset-0 z-0 pointer-events-none">
+        <div class="absolute inset-0 bg-gradient-to-br from-black via-gray-900 to-red-900 opacity-95"></div>
+        <!-- 紅色光暈 -->
+        <div class="absolute -top-40 left-1/2 -translate-x-1/2 w-[700px] h-[300px] bg-red-700 opacity-25 rounded-full filter blur-3xl"></div>
+        <div class="absolute bottom-0 right-0 w-[400px] h-[200px] bg-pink-900 opacity-30 rounded-full filter blur-2xl"></div>
+        <!-- 幾何SVG裝飾 -->
+        <svg class="absolute left-10 top-1/2 -translate-y-1/2" width="220" height="220" viewBox="0 0 220 220" fill="none">
+            <circle cx="110" cy="110" r="100" stroke="rgba(255,255,255,0.07)" stroke-width="2" />
+            <circle cx="110" cy="110" r="70" stroke="rgba(255,80,80,0.18)" stroke-width="4" />
+        </svg>
+    </div>
+
+    <!-- 導覽列 -->
+    <nav class="relative z-10 bg-gradient-to-r from-black via-gray-900 to-red-900 text-white shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="text-2xl font-bold tracking-widest">大無限健身</div>
+            <ul class="flex space-x-6 text-sm">
+                <li><a href="#" class="hover:text-yellow-300">關於我們</a></li>
+                <li><a href="#" class="hover:text-yellow-300">課程介紹</a></li>
+                <li><a href="#" class="hover:text-yellow-300">最新消息</a></li>
+                <li><a href="#" class="hover:text-yellow-300">教練介紹</a></li>
+                <li><a href="#" class="hover:text-yellow-300">營業據點</a></li>
+                <li><a href="#" class="hover:text-yellow-300">會員方案</a></li>
+                <li>
+                    <a href="@Url.Action("Login")" class="bg-pink-600 hover:bg-pink-700 px-4 py-2 rounded text-white font-semibold ml-4">登入</a>
+                </li>
+            </ul>
+            <div>
+                <input type="text" placeholder="搜尋" class="px-2 py-1 rounded-md text-black">
+            </div>
+        </div>
+    </nav>
+
+    <!-- 主視覺區塊 -->
+    <section class="relative z-10 flex items-center justify-center py-16 px-4 text-center">
+        <div class="max-w-4xl bg-white/10 rounded-2xl shadow-lg p-8 mx-auto backdrop-blur-sm border border-white/10">
+            <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80"
+                 alt="健身房主視覺" class="rounded-lg shadow-lg mx-auto max-h-64 w-full object-cover mb-6 border-2 border-white/20">
+            <h1 class="text-4xl sm:text-5xl font-extrabold text-pink-500 mt-2 drop-shadow">女神降臨 母親節專屬健康行動</h1>
+            <p class="text-white text-lg mt-2 font-medium drop-shadow">報名來就送 免費 InBody 檢測與數據講解</p>
+            <button class="mt-4 bg-pink-600 hover:bg-pink-700 text-white font-semibold py-2 px-6 rounded-lg shadow-lg transition">教練課加碼</button>
+        </div>
+    </section>
+
+    <!-- 下方圖片與文字區塊 -->
+    <section class="relative z-10 bg-white/10 py-12 backdrop-blur-sm">
+        <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="text-center bg-white/20 rounded-xl p-6 shadow hover:scale-105 transition">
+                <img src="https://images.unsplash.com/photo-1517960413843-0aee8e2d471c?auto=format&fit=crop&w=400&q=80" alt="教練團隊" class="rounded-lg shadow mx-auto max-h-44 object-cover">
+                <h2 class="text-xl font-semibold mt-4 text-gray-900">專業教練團隊</h2>
+                <p class="mt-2 text-gray-700">我們擁有經驗豐富的教練群，為您量身打造訓練計畫。</p>
+            </div>
+            <div class="text-center bg-white/20 rounded-xl p-6 shadow hover:scale-105 transition">
+                <img src="https://images.unsplash.com/photo-1519864600265-abb23847ef2c?auto=format&fit=crop&w=400&q=80" alt="設備設施" class="rounded-lg shadow mx-auto max-h-44 object-cover">
+                <h2 class="text-xl font-semibold mt-4 text-gray-900">先進設備設施</h2>
+                <p class="mt-2 text-gray-700">配備高品質運動器材，讓每一次訓練更加安全有效。</p>
+            </div>
+            <div class="text-center bg-white/20 rounded-xl p-6 shadow hover:scale-105 transition">
+                <img src="https://images.unsplash.com/photo-1504439468489-c8920d796a29?auto=format&fit=crop&w=400&q=80" alt="舒適環境" class="rounded-lg shadow mx-auto max-h-44 object-cover">
+                <h2 class="text-xl font-semibold mt-4 text-gray-900">舒適運動環境</h2>
+                <p class="mt-2 text-gray-700">寬敞明亮的空間與完善的衛生設施，提升運動體驗。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cookies 提示 -->
+    <footer class="fixed bottom-0 w-full bg-gray-900 text-white text-sm px-4 py-2 flex justify-between items-center z-20">
+        <p>本網站使用 Cookies 為您提供更好的服務。繼續瀏覽本網站，即表示您同意使用 Cookies。</p>
+        <a href="#" class="underline">點擊此處閱讀我們的 Cookies 政策</a>
+        <button class="ml-4 bg-blue-500 hover:bg-blue-600 px-3 py-1 rounded">接受</button>
+    </footer>
+</body>
+</html>
+@section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        @if (TempData["SuccessMessage"] != null)
+        {
+            <text>
+                    Swal.fire({
+                        icon: 'success',
+                        title: '@TempData["SuccessMessage"]',
+                        confirmButtonColor: '#3085d6'
+                    });
+            </text>
+        }
+    </script>
+}
