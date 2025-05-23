@@ -6,7 +6,7 @@
         public DBMembers Members { get; set; }
 
         public int CourseID { get; set; }
-        public DBCourses Course { get; set; }
+        public DBCourses Courses { get; set; }
 
 
     }

@@ -12,10 +12,10 @@ namespace MVC_DBGym.Data
         }
         public DbSet<DBCoaches>  Coaches{ get; set; }
         public DbSet<DBCourses>  Courses{ get; set; }
-        public DbSet<DBPayment>  Payment{ get; set; }
-        public DbSet<DBPaymentType>  PaymentType{ get; set; }
-        public DbSet<DBPtype>  PType{ get; set; }
-        public DbSet<DBReserve>  Reserve{ get; set; }
+        public DbSet<DBPayment>  Payments{ get; set; }
+        public DbSet<DBPaymentType>  PaymentTypes{ get; set; }
+        public DbSet<DBPtype>  PTyps{ get; set; }
+        public DbSet<DBReserve>  Reserves{ get; set; }
         public DbSet<DBMembers> Members { get; set; }
 
 

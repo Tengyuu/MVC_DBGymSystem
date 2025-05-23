@@ -280,11 +280,11 @@ namespace MVC_DBGym.Controllers
         public IActionResult Login()
         {
             //New Add session
-            //if (HttpContext.Session.GetString("Name") == null)
-            //{
-            //    TempData["Message"] = "Please Login!";
-            //    //return RedirectToAction("Login", "DBGymSystem");
-            //}
+            if (HttpContext.Session.GetString("Name") == null)
+            {
+                TempData["Message"] = "Please Login!";
+                //return RedirectToAction("Login", "DBGymSystem");
+            }
             return View();
         }
         [HttpPost]
