@@ -35,9 +35,9 @@
             <div class="text-2xl font-bold tracking-widest">大無限健身</div>
             <ul class="flex space-x-6 text-sm">
                 <li><a href="#" class="hover:text-yellow-300">關於我們</a></li>
-                <li><a href="#" class="hover:text-yellow-300">課程介紹</a></li>
+                <li><a href="@Url.Action("CoursesList")" class="hover:text-yellow-300">課程介紹</a></li>
                 <li><a href="#" class="hover:text-yellow-300">最新消息</a></li>
-                <li><a href="#" class="hover:text-yellow-300">教練介紹</a></li>
+                <li><a href="@Url.Action("CoachesList")" class="hover:text-yellow-300">教練介紹</a></li>
                 <li><a href="#" class="hover:text-yellow-300">營業據點</a></li>
                 <li><a href="#" class="hover:text-yellow-300">會員方案</a></li>
                 <li>
@@ -61,33 +61,44 @@
         </div>
     </section>
 
+    <section class="relative z-10 py-12">
+        <div class="max-w-2xl mx-auto bg-white/10 backdrop-blur-lg rounded-xl shadow-lg p-8 border border-white/20">
+            <h2 class="text-2xl font-bold text-pink-500 mb-4 tracking-widest text-center drop-shadow">營業據點</h2>
+            <div class="flex flex-col md:flex-row items-center gap-8">
+                <img src="https://www.yzu.edu.tw/images/09-1-3.jpg" alt="元智大學" class="w-40 h-40 object-cover rounded-lg shadow-md border-2 border-pink-500 mb-4 md:mb-0">
+                <div class="text-left text-white flex-1">
+                    <p class="mb-2"><span class="font-semibold text-pink-400">地址：</span>桃園市中壢區遠東路135號（元智大學）</p>
+                    <p class="mb-2"><span class="font-semibold text-pink-400">連絡電話：</span>(03)463-8800</p>
+                    <p class="mb-2"><span class="font-semibold text-pink-400">營業時間：</span>週一至週日 07:00 - 22:00</p>
+                    <p class="mb-2"><span class="font-semibold text-pink-400">Email：</span>service@yzu.edu.tw</p>
+                    <a href="https://www.yzu.edu.tw/" target="_blank" class="inline-block mt-3 bg-pink-600 hover:bg-pink-700 text-white font-semibold px-5 py-2 rounded-lg shadow transition">查看地圖</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- 下方圖片與文字區塊 -->
     <section class="relative z-10 bg-white/10 py-12 backdrop-blur-sm">
         <div class="max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-6">
             <div class="text-center bg-white/20 rounded-xl p-6 shadow hover:scale-105 transition">
-                <img src="https://images.unsplash.com/photo-1517960413843-0aee8e2d471c?auto=format&fit=crop&w=400&q=80" alt="教練團隊" class="rounded-lg shadow mx-auto max-h-44 object-cover">
+                <img src="~/images/gym1.jpg" alt="教練團隊" class="rounded-lg shadow mx-auto max-h-44 object-cover">
                 <h2 class="text-xl font-semibold mt-4 text-gray-900">專業教練團隊</h2>
                 <p class="mt-2 text-gray-700">我們擁有經驗豐富的教練群，為您量身打造訓練計畫。</p>
             </div>
             <div class="text-center bg-white/20 rounded-xl p-6 shadow hover:scale-105 transition">
-                <img src="https://images.unsplash.com/photo-1519864600265-abb23847ef2c?auto=format&fit=crop&w=400&q=80" alt="設備設施" class="rounded-lg shadow mx-auto max-h-44 object-cover">
+                <img src="~/images/gym2.jpg" alt="設備設施" class="rounded-lg shadow mx-auto max-h-44 object-cover">
                 <h2 class="text-xl font-semibold mt-4 text-gray-900">先進設備設施</h2>
                 <p class="mt-2 text-gray-700">配備高品質運動器材，讓每一次訓練更加安全有效。</p>
             </div>
             <div class="text-center bg-white/20 rounded-xl p-6 shadow hover:scale-105 transition">
-                <img src="https://images.unsplash.com/photo-1504439468489-c8920d796a29?auto=format&fit=crop&w=400&q=80" alt="舒適環境" class="rounded-lg shadow mx-auto max-h-44 object-cover">
+                <img src="~/images/gym3.jpg" alt="舒適環境" class="rounded-lg shadow mx-auto max-h-44 object-cover">
                 <h2 class="text-xl font-semibold mt-4 text-gray-900">舒適運動環境</h2>
                 <p class="mt-2 text-gray-700">寬敞明亮的空間與完善的衛生設施，提升運動體驗。</p>
             </div>
         </div>
     </section>
 
-    <!-- Cookies 提示 -->
-    <footer class="fixed bottom-0 w-full bg-gray-900 text-white text-sm px-4 py-2 flex justify-between items-center z-20">
-        <p>本網站使用 Cookies 為您提供更好的服務。繼續瀏覽本網站，即表示您同意使用 Cookies。</p>
-        <a href="#" class="underline">點擊此處閱讀我們的 Cookies 政策</a>
-        <button class="ml-4 bg-blue-500 hover:bg-blue-600 px-3 py-1 rounded">接受</button>
-    </footer>
+   
 </body>
 </html>
 @section Scripts {

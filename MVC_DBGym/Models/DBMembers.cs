@@ -27,9 +27,9 @@ namespace MVC_DBGym.Models
         public string Email { get; set; }
 
         [DataType(DataType.Date)]
-        public DateTime JoinDate { get; set; }
+        public DateTime JoinDate { get; set; } = DateTime.Now;
 
-        public string Role { get; set; }
+        public string Role { get; set; } = "Member";
 
         [ValidateNever]
         public ICollection<DBPayment> Payments { get; set; }
