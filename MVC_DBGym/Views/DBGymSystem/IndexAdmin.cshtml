@@ -1,0 +1,61 @@
+﻿
+@{
+    ViewData["Title"] = "IndexAdmin";
+}
+
+<h1>IndexAdmin</h1>
+    <title>Admin 控制台</title>
+<div class="main">
+    <div class="admin-container">
+        <h1>Admin 控制台</h1>
+        <a href="@Url.Action("MembersList")" class="admin-button">管理學生</a>
+        <a href="" class="admin-button">管理課程</a>
+        <a href="" class="admin-button">查看報表</a>
+    </div>
+</div>
+
+
+
+<style>
+    .main {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: #f4f4f4;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 100vh;
+        justify-content: center;
+    }
+
+    .admin-container {
+        background: #fff;
+        padding: 40px;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        text-align: center;
+    }
+
+    h1 {
+        margin-bottom: 30px;
+        color: #333;
+    }
+
+    .admin-button {
+        display: inline-block;
+        background-color: #4CAF50;
+        color: white;
+        padding: 15px 30px;
+        margin: 10px;
+        text-decoration: none;
+        font-size: 16px;
+        border-radius: 8px;
+        transition: background-color 0.3s ease;
+    }
+
+        .admin-button:hover {
+            background-color: #45a049;
+        }
+</style>
+

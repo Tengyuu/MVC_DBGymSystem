@@ -24,8 +24,14 @@ namespace MVC_DBGym.Controllers
         {
             return View();
         }
-
-       
+        public IActionResult IndexMember()
+        {
+            return View();
+        }
+        public IActionResult IndexAdmin()
+        {
+            return View();
+        }
         [HttpGet]
         public IActionResult Create()
         {
@@ -59,7 +65,7 @@ namespace MVC_DBGym.Controllers
             };
             return View(members);
         }
-       
+        //登入
         [HttpGet]
         public IActionResult Login()
         {
@@ -91,7 +97,7 @@ namespace MVC_DBGym.Controllers
 
                 if(users.Role == "Admin")
                 {
-                    return RedirectToAction("Index", "DBGymSystem");
+                    return RedirectToAction("IndexAdmin", "DBGymSystem");
                 }
                 else
                 {
@@ -118,6 +124,12 @@ namespace MVC_DBGym.Controllers
                 .Include(c=>c.Coach)
                 .ToListAsync();
             return View(courses);
+        }
+        //會員列表
+        public async Task<IActionResult> MembersList()
+        {
+            var members = await _context.Members.ToListAsync();
+            return View(members);
         }
         //Create教練
         [HttpGet]
