@@ -1,11 +1,11 @@
 ﻿namespace MVC_DBGym.Models
 {
-    public class DBPaymentType
+    public class PaymentType
     {
         public int PaymentID { get; set; }  // FK to Payment
         public int PTypeID { get; set; }    // FK to PType
 
-        public DBPayment Payments { get; set; }
-        public DBPtype PTypes { get; set; }
+        public Payment Payment { get; set; }
+        public Ptype PType { get; set; }
     }
 }

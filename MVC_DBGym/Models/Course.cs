@@ -1,8 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
+using System.Xml;
 
 namespace MVC_DBGym.Models
 {
-    public class DBCourses
+    public class Course
     {
         public int CourseID { get; set; }
         public string CourseName { get; set; }
@@ -11,9 +12,9 @@ namespace MVC_DBGym.Models
         public DateTime CourseDate { get; set; }
         public int CoachID { get; set; }
         [ValidateNever]
-        public DBCoaches Coach { get; set; }
+        public Coach Coach { get; set; }
         [ValidateNever]
-        public ICollection<DBReserve> Reserves { get; set; }
+        public ICollection<Reserve> Reserve { get; set; } = new List<Reserve>();
 
     }
 }

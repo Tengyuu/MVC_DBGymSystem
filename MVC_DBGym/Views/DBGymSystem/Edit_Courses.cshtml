@@ -1,19 +1,18 @@
 ﻿@model MVC_DBGym.Models.Course
 
 @{
-    ViewData["Title"] = "CreateCourses";
+    ViewData["Title"] = "Edit_Courses";
 }
 
-<h1>CreateCourses</h1>
-
-<div asp-validation-summary="All" class="text-danger"></div>
+<h1>Edit_Courses</h1>
 
 <h4>DBCourses</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="CreateCourses">
+        <form asp-action="Edit_Courses">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="CourseID" />
             <div class="form-group">
                 <label asp-for="CourseName" class="control-label"></label>
                 <input asp-for="CourseName" class="form-control" />
@@ -36,10 +35,11 @@
             </div>
             <div class="form-group">
                 <label asp-for="CoachID" class="control-label"></label>
-                <select asp-for="CoachID" class ="form-control" asp-items="ViewBag.CoachID"></select>
+                <select asp-for="CoachID" class="form-control" asp-items="ViewBag.CoachID"></select>
+                <span asp-validation-for="CoachID" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>
     </div>

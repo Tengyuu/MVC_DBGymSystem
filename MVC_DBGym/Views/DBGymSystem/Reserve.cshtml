@@ -1,10 +1,19 @@
 ﻿@model IEnumerable<MVC_DBGym.Models.Course>
 
+
 @{
-    ViewData["Title"] = "CoursesList";
+    ViewData["Title"] = "Reserve";
+    var mid = ViewBag.MemberID;
 }
 
-<h1>CoursesList</h1>
+<h1>Reserve</h1>
+
+@if (TempData["Enrollmsg"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["Enrollmsg"]
+    </div>
+}
 
 
 <table class="table">
@@ -44,13 +53,18 @@
                 @Html.DisplayFor(modelItem => item.CourseDate)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Coach.CoachName)
+                @Html.DisplayFor(modelItem => item.Coach.CoachID)
             </td>
             <td>
-                <a asp-action="Edit_Courses" asp-route-id="@item.CourseID">Edit</a> |
-                <a asp-action="Delete" asp-route-id="@item.CourseID">Delete</a>
+                    <form asp-action="ReserveCourse" method="post">
+                        <input type="hidden" name="MemberID" value="@mid" />
+                        <input type="hidden" name="CourseID" value="@item.CourseID" />
+                        <button type="submit" class="btn btn-success">選課</button>
+                    </form>
             </td>
-        </tr>
+              
+        
+            </tr>
 }
     </tbody>
 </table>

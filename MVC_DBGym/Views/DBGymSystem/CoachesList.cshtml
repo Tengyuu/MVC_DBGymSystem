@@ -1,4 +1,4 @@
-﻿@model IEnumerable<MVC_DBGym.Models.DBCoaches>
+﻿@model IEnumerable<MVC_DBGym.Models.Coach>
 
 @{
     ViewData["Title"] = "CoachesList";
@@ -34,8 +34,7 @@
                 @Html.DisplayFor(modelItem => item.Speciality)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.CoachID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.CoachID">Details</a> |
+                <a asp-action="Edit_Coaches" asp-route-id="@item.CoachID">Edit</a> |
                 <a asp-action="Delete" asp-route-id="@item.CoachID">Delete</a>
             </td>
         </tr>

@@ -1,0 +1,51 @@
+﻿@model MVC_DBGym.Models.Member
+
+@{
+    ViewData["Title"] = "SelectedCourse";
+}
+
+<h1>SelectedCourse</h1>
+
+@if (TempData["DropSuccessmsg"] != null)
+{
+    <div class="alert alert-success">
+        @TempData["DropSuccessmsg"]
+    </div>
+}
+@if (Model?.Reserve != null && Model.Reserve.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>課程名稱</th>
+                <th>課程ID</th>
+                <th>教練</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var enrollment in Model.Reserve)
+            {
+                <tr>
+                    <td>@enrollment.Course?.CourseName</td>
+                    <td>@enrollment.Course?.CourseID</td>
+                    <td>@enrollment.Course?.Coach?.CoachName</td>
+                   
+                 
+                    <td>
+                        <form asp-action="DropCourse" method="post">
+                            <input type="hidden" name="MemberID" value="@Model.MemberID />
+                            <input type="hidden" name="CourseID" value="@enrollment.CourseID" />
+                            <button type="submit" class="btn btn-success">退課</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>尚未選課。</p>
+}
+<div><a asp-action="Index">← 上一頁</a></div>

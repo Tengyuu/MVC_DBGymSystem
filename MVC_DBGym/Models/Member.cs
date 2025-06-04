@@ -3,8 +3,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MVC_DBGym.Models
 {
-    public class DBMembers
+    public class Member
     {
+        
         public int MemberID { get; set; }
         [Display(Name = "電話")]
         [Required(ErrorMessage = "電話不可為空")]
@@ -32,8 +33,8 @@ namespace MVC_DBGym.Models
         public string Role { get; set; } = "Member";
 
         [ValidateNever]
-        public ICollection<DBPayment> Payments { get; set; }
+        public ICollection<Payment> Payment { get; set; }
         [ValidateNever]
-        public ICollection<DBReserve> Reserves { get; set; }
+        public ICollection<Reserve> Reserve { get; set; } = new List<Reserve>();
     }
 }

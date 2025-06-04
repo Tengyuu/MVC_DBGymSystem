@@ -1,7 +1,63 @@
 ﻿
 @{
     ViewData["Title"] = "IndexMember";
+    var mId = ViewBag.SessionID; 
 }
 
 <h1>IndexMember</h1>
+
+
+<title>Member 控制台</title>
+<div class="main">
+    <div class="member-container">
+        <h1>Member控制台</h1>
+        <a href="@Url.Action("Reserve")" class="member-button">預約課程</a>
+        <a href="@Url.Action("SelectedCourse",new { id = mId})" class="member-button">已選課程</a>
+    </div>
+</div>
+
+
+
+<style>
+    .main {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: #f4f4f4;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 100vh;
+        justify-content: center;
+    }
+
+    .member-container {
+        background: #fff;
+        padding: 40px;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        text-align: center;
+    }
+
+    h1 {
+        margin-bottom: 30px;
+        color: #333;
+    }
+
+    .member-button {
+        display: inline-block;
+        background-color: #4CAF50;
+        color: white;
+        padding: 15px 30px;
+        margin: 10px;
+        text-decoration: none;
+        font-size: 16px;
+        border-radius: 8px;
+        transition: background-color 0.3s ease;
+    }
+
+        .member-button:hover {
+            background-color: #45a049;
+        }
+</style>
 
