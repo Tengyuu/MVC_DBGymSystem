@@ -10,10 +10,6 @@ namespace MVC_DBGym.Controllers
 {
     public class DBGymSystemController : Controller
     {
-        //public IActionResult Index()
-        //{
-        //    return View();
-        //}
         private readonly CmsContext _context;
         public DBGymSystemController(CmsContext context)
         {
@@ -38,39 +34,6 @@ namespace MVC_DBGym.Controllers
         public IActionResult IndexAdmin()
         {
             return View();
-        }
-        [HttpGet]
-        public IActionResult CreateMembers()
-        {
-            ViewBag.GenderList = new List<SelectListItem>
-            {
-                new SelectListItem {Text = "男", Value= "男" },
-                new SelectListItem {Text = "女", Value= "女" }
-            };
-            return View();
-        }
-        //Post
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateMembers([Bind("MemberID,Phone,MemberName,Gender,Email,JoinDate,Password")] Member members)
-        {
-            if (ModelState.IsValid)
-            {
-                //將實體加入DbSet
-                _context.Member.Add(members);
-                //將資料異動儲存到資料庫
-                await _context.SaveChangesAsync();
-                TempData["SuccessMessage"] = "註冊成功！";
-                //導向至Index
-                return RedirectToAction("Index","DBGymsystem");
-               
-            }
-            ViewBag.GenderList = new List<SelectListItem>
-            {
-                new SelectListItem {Text = "男", Value= "男" },
-                new SelectListItem {Text = "女", Value= "女" }
-            };
-            return View(members);
         }
         //登入
         [HttpGet]
@@ -116,7 +79,7 @@ namespace MVC_DBGym.Controllers
         //教練列表
         public async Task<IActionResult> CoachesList()
         {
-            var coaches = await _context.Coache.ToListAsync();
+            var coaches = await _context.Coach.ToListAsync();
             return View(coaches);
         }
         //課程列表
@@ -150,7 +113,7 @@ namespace MVC_DBGym.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Coache.Add(coaches);
+                _context.Coach.Add(coaches);
                 await _context.SaveChangesAsync();
                 TempData["CreateSuccessMessage"] = "新增成功!";
                 return RedirectToAction(nameof(Index));
@@ -162,11 +125,45 @@ namespace MVC_DBGym.Controllers
             };
             return View(coaches);
         }
+        //新增會員
+        [HttpGet]
+        public IActionResult CreateMembers()
+        {
+            ViewBag.GenderList = new List<SelectListItem>
+            {
+                new SelectListItem {Text = "男", Value= "男" },
+                new SelectListItem {Text = "女", Value= "女" }
+            };
+            return View();
+        }
+        //Post
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateMembers([Bind("MemberID,Phone,MemberName,Gender,Email,JoinDate,Password")] Member members)
+        {
+            if (ModelState.IsValid)
+            {
+                //將實體加入DbSet
+                _context.Member.Add(members);
+                //將資料異動儲存到資料庫
+                await _context.SaveChangesAsync();
+                TempData["CreateSuccessMessage"] = "註冊成功！";
+                //導向至Index
+                return RedirectToAction("Index", "DBGymsystem");
+
+            }
+            ViewBag.GenderList = new List<SelectListItem>
+            {
+                new SelectListItem {Text = "男", Value= "男" },
+                new SelectListItem {Text = "女", Value= "女" }
+            };
+            return View(members);
+        }
         //Create課程
         [HttpGet]
         public async Task<IActionResult> CreateCourses()
         {
-            var coachlist = await _context.Coache.ToListAsync();
+            var coachlist = await _context.Coach.ToListAsync();
             ViewBag.CoachID = new SelectList(coachlist, "CoachID", "CoachName");
             return View();
         }
@@ -181,7 +178,7 @@ namespace MVC_DBGym.Controllers
                 TempData["CreateSuccessMessage"] = "新增成功!";
                 return RedirectToAction(nameof(Index));
             }
-            var coachlist = await _context.Coache.ToListAsync();
+            var coachlist = await _context.Coach.ToListAsync();
             ViewBag.CoachID = new SelectList(coachlist, "CoachID", "CoachName");
             return View(courses);
         }
@@ -227,11 +224,11 @@ namespace MVC_DBGym.Controllers
 
             if (alreadyReserved)
             {
-                TempData["Enrollmsg"] = $"{course.CourseName} 已經選過了！";
+                TempData["Enrollmsg"] = $"{course.CourseName} 已經預約了！";
             }
             else if (currentCapacity >= course.MaxCapacity)
             {
-                TempData["Enrollmsg"] = $"{course.CourseName} 人數已滿，選課失敗！";
+                TempData["Enrollmsg"] = $"{course.CourseName} 人數已滿，預約失敗！";
             }
             else
             {
@@ -242,7 +239,7 @@ namespace MVC_DBGym.Controllers
                 };
                 _context.Reserve.Add(reserve);
                 await _context.SaveChangesAsync();
-                TempData["Enrollmsg"] = $"{course.CourseName}選課成功!";
+                TempData["Enrollmsg"] = $"{course.CourseName}預約成功!";
             }
 
             return RedirectToAction("Reserve");
@@ -294,7 +291,7 @@ namespace MVC_DBGym.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit_Courses(int? id)
         {
-            var coachList = await _context.Coache.ToListAsync();
+            var coachList = await _context.Coach.ToListAsync();
             ViewBag.CoachID = new SelectList(coachList, "CoachID", "CoachName");
 
             if (id == null || _context.Course == null)
@@ -312,7 +309,7 @@ namespace MVC_DBGym.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit_Courses(int id, [Bind("CourseID,CourseName,Description,MaxCapacity,CourseDate,CoachID")] Course courses)
         {
-            var coachList = await _context.Coache.ToListAsync();
+            var coachList = await _context.Coach.ToListAsync();
             ViewBag.CoachID = new SelectList(coachList, "CoachID", "CoachName");
 
             if (id != courses.CourseID)
@@ -337,7 +334,7 @@ namespace MVC_DBGym.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(IndexAdmin));
+                return RedirectToAction("CoursesList");
             }
             return View(courses);
         }
@@ -350,11 +347,11 @@ namespace MVC_DBGym.Controllers
         [HttpGet]
         public async Task<IActionResult> Edit_Coaches(int? id)
         {
-            if (id == null || _context.Coache == null)
+            if (id == null || _context.Coach == null)
             {
                 return NotFound();
             }
-            var coache = await _context.Coache.FindAsync(id);
+            var coache = await _context.Coach.FindAsync(id);
             if (coache == null)
             {
                 return NotFound();
@@ -373,7 +370,7 @@ namespace MVC_DBGym.Controllers
             {
                 try
                 {
-                    _context.Coache.Update(coaches);
+                    _context.Coach.Update(coaches);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
@@ -387,13 +384,13 @@ namespace MVC_DBGym.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(IndexAdmin));
+                return RedirectToAction("CoachesList");
             }
             return View(coaches);
         }
         private bool CoachExists(int id)
         {
-            return _context.Coache.Any(m => m.CoachID == id);
+            return _context.Coach.Any(m => m.CoachID == id);
         }
 
 
@@ -438,13 +435,112 @@ namespace MVC_DBGym.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(IndexAdmin));
+                return RedirectToAction("MembersList");
             }
             return View(members);
         }
         private bool MemberExists(int id)
         {
             return _context.Member.Any(m => m.MemberID == id);
+        }
+
+        //Delete Member
+        [HttpGet]
+        public async Task<IActionResult> Delete_Member(int? id)
+        {
+            if (id == null || _context.Member == null)
+            {
+                return NotFound();
+            }
+            var member = await _context.Member.FirstOrDefaultAsync(m => m.MemberID == id);
+            if (member == null)
+            {
+                return NotFound();
+            }
+            return View(member);
+        }
+        [HttpPost, ActionName("Delete_Member")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed_M(int id)
+        {
+            if (_context.Member == null)
+            {
+                return Problem("Entity set 'CmsContext.Member' is null.");
+            }
+            var member = await _context.Member.FindAsync(id);
+
+            if (member != null)
+            {
+                _context.Member.Remove(member);
+                await _context.SaveChangesAsync();
+            }
+            return RedirectToAction(nameof(MembersList));
+        }
+
+        //Delete Coach
+        [HttpGet]
+        public async Task<IActionResult> Delete_Coach(int? id)
+        {
+            if (id == null || _context.Coach == null)
+            {
+                return NotFound();
+            }
+            var member = await _context.Coach.FirstOrDefaultAsync(m => m.CoachID == id);
+            if (member == null)
+            {
+                return NotFound();
+            }
+            return View(member);
+        }
+        [HttpPost, ActionName("Delete_Coach")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed_C(int id)
+        {
+            if (_context.Coach == null)
+            {
+                return Problem("Entity set 'CmsContext.Member' is null.");
+            }
+            var coach = await _context.Coach.FindAsync(id);
+
+            if (coach != null)
+            {
+                _context.Coach.Remove(coach);
+                await _context.SaveChangesAsync();
+            }
+            return RedirectToAction(nameof(CoachesList));
+        }
+
+        //Delete Course
+        [HttpGet]
+        public async Task<IActionResult> Delete_Course(int? id)
+        {
+            if (id == null || _context.Course == null)
+            {
+                return NotFound();
+            }
+            var course = await _context.Course.FirstOrDefaultAsync(m => m.CoachID == id);
+            if (course == null)
+            {
+                return NotFound();
+            }
+            return View(course);
+        }
+        [HttpPost, ActionName("Delete_Course")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed_Co(int id)
+        {
+            if (_context.Course == null)
+            {
+                return Problem("Entity set 'CmsContext.Member' is null.");
+            }
+            var course = await _context.Course.FindAsync(id);
+
+            if (course != null)
+            {
+                _context.Course.Remove(course);
+                await _context.SaveChangesAsync();
+            }
+            return RedirectToAction(nameof(CoursesList));
         }
     }
 }

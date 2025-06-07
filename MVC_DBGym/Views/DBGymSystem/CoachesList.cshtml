@@ -34,8 +34,8 @@
                 @Html.DisplayFor(modelItem => item.Speciality)
             </td>
             <td>
-                <a asp-action="Edit_Coaches" asp-route-id="@item.CoachID">Edit</a> |
-                <a asp-action="Delete" asp-route-id="@item.CoachID">Delete</a>
+                    <a asp-action="Edit_Coaches" asp-route-id="@item.CoachID" class="btn btn-info">Edit</a> |
+                    <a asp-action="Delete_Coach" asp-route-id="@item.CoachID" class="btn btn-danger">Delete</a>
             </td>
         </tr>
 }

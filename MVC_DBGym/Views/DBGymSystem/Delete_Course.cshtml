@@ -1,0 +1,51 @@
+﻿@model MVC_DBGym.Models.Course
+
+@{
+    ViewData["Title"] = "Delete_Course";
+}
+
+<h1>Delete_Course</h1>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Course</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CourseName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CourseName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.MaxCapacity)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.MaxCapacity)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CourseDate)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CourseDate)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Coach)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Coach.CoachID)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete_Course">
+        <input type="hidden" asp-for="CourseID" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-action="CoursesList">Back to List</a>
+    </form>
+</div>

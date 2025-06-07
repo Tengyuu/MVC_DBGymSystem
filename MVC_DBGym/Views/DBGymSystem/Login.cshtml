@@ -8,6 +8,10 @@
 }
 
 
+<div>
+    <p style="color:black">(管理員登入:Id = 0 ,Password = Admin)</p>
+    <p style="color:black">(會員登入:Id = 1 ,Password = Aa1)</p>
+</div>
 
 <div class="login-page">
     <div class="glass-container">
@@ -18,13 +22,11 @@
                 <input type="text" id="mid" name="mid" required placeholder="Account(ID):" class="form-control" />
                 <input type="password" id="Password" name="Psd" required placeholder="Password" class="form-control" />
                 <div class="options">
-                    <input type="checkbox" id="remember" name="remember" />
-                    <label for="remember">Remember me</label>
-                    <a href="#">@* x *@</a>
+                    <a href="@Url.Action("CreateMembers")" id="register">註冊會員</a>
                 </div>
 
                 <button type="submit">Login</button>
-                <p>@* x *@<a href="@Url.Action("CreateMembers")" id="register">Register</a></p>
+    
             </form>
         </div>
     </div>
@@ -89,16 +91,13 @@
             color: white
         }
 
-            .options input {
-                margin-right: 5px;
-                margin-top: 0px;
-            }
+         
 
-            .options a {
+        .options a {
                 text-decoration: none;
                 color: white;
-                margin-left: auto;
-            }
+                margin:auto;
+        }
 
         * {
             margin: 0;

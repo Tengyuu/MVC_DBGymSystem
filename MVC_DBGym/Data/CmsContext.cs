@@ -10,7 +10,7 @@ namespace MVC_DBGym.Data
         {
 
         }
-        public DbSet<Coach>  Coache { get; set; }
+        public DbSet<Coach>  Coach { get; set; }
         public DbSet<Course>  Course{ get; set; }
         public DbSet<Payment>  Payment{ get; set; }
         public DbSet<PaymentType>  PaymentType{ get; set; }
