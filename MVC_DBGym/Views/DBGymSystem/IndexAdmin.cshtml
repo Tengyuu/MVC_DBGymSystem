@@ -2,8 +2,10 @@
 @{
     ViewData["Title"] = "IndexAdmin";
 }
+<div class="d-flex justify-content-end mt-3 me-3">
+    <a asp-controller="DBGymSystem" asp-action="Logout" class="btn btn-danger">登出</a>
+</div>
 
-<h1>IndexAdmin</h1>
     <title>Admin 控制台</title>
 <div class="main">
     <div class="admin-container">
@@ -11,6 +13,7 @@
         <a href="@Url.Action("MembersList")" class="admin-button">管理學生</a>
         <a href="@Url.Action("CoursesList")" class="admin-button">管理課程</a>
         <a href="@Url.Action("CoachesList")" class="admin-button">管理教練</a>
+        <a href="@Url.Action("Payment","Pay")" class="admin-button">交易紀錄</a>
     </div>
 </div>
 

@@ -1,19 +1,22 @@
 ﻿@model IEnumerable<MVC_DBGym.Models.Coach>
 
 @{
-    ViewData["Title"] = "CoachesList";
+    ViewData["Title"] = "教練介紹";
 }
 
-<h1>CoachesList</h1>
+<h1>教練介紹</h1>
 
 <p>
-    <a asp-action="CreateCoaches">新增教練</a>
+    <a asp-action="Create">Create New</a>
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.CoachName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Gender)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Phone)
@@ -31,19 +34,18 @@
                 @Html.DisplayFor(modelItem => item.CoachName)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.Gender)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.Phone)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Speciality)
             </td>
             <td>
-                    <a asp-action="Edit_Coaches" asp-route-id="@item.CoachID" class="btn btn-info">Edit</a> |
-                    <a asp-action="Delete_Coach" asp-route-id="@item.CoachID" class="btn btn-danger">Delete</a>
+                <a asp-action="Edit" asp-route-id="@item.CoachID">Edit</a> 
             </td>
         </tr>
 }
     </tbody>
 </table>
-<div>
-    <a asp-action="IndexAdmin">返回</a>
-</div>

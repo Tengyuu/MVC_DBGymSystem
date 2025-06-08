@@ -6,7 +6,7 @@
     var mid = ViewBag.MemberID;
 }
 
-<h1>Reserve</h1>
+<h1>預約課程</h1>
 
 @if (TempData["Enrollmsg"] != null)
 {
@@ -53,7 +53,7 @@
                 @Html.DisplayFor(modelItem => item.CourseDate)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Coach.CoachID)
+                @Html.DisplayFor(modelItem => item.Coach.CoachName)
             </td>
             <td>
                     <form asp-action="ReserveCourse" method="post">
@@ -68,3 +68,8 @@
 }
     </tbody>
 </table>
+
+<div>
+    <a asp-action="IndexMember">返回</a>
+    <a asp-controller="Pay" asp-action="MyReservations" asp-route-memberId="@mid">查看我的預約與付款狀態</a>
+</div>

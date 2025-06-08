@@ -3,9 +3,9 @@
     ViewData["Title"] = "IndexMember";
     var mId = ViewBag.SessionID; 
 }
-
-<h1>IndexMember</h1>
-
+<div class="d-flex justify-content-end mt-3 me-3">
+    <a asp-controller="DBGymSystem" asp-action="Logout" class="btn btn-danger">登出</a>
+</div>
 
 <title>Member 控制台</title>
 <div class="main">

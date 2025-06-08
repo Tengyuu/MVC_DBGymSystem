@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MVC_DBGym.Models;
+using MVC_DBGym.ViewModels;
 using System.Data;
 
 namespace MVC_DBGym.Data
@@ -13,8 +14,7 @@ namespace MVC_DBGym.Data
         public DbSet<Coach>  Coach { get; set; }
         public DbSet<Course>  Course{ get; set; }
         public DbSet<Payment>  Payment{ get; set; }
-        public DbSet<PaymentType>  PaymentType{ get; set; }
-        public DbSet<Ptype>  PTyp{ get; set; }
+        public DbSet<PType>  PType{ get; set; }
         public DbSet<Reserve>  Reserve{ get; set; }
         public DbSet<Member> Member { get; set; }
 
@@ -25,9 +25,17 @@ namespace MVC_DBGym.Data
             modelBuilder.Entity<Course>().HasKey(c => c.CourseID);
             modelBuilder.Entity<Member>().HasKey(c => c.MemberID);
             modelBuilder.Entity<Payment>().HasKey(c => c.PaymentID);
-            modelBuilder.Entity<Ptype>().HasKey(c => c.PTypeID);
+            modelBuilder.Entity<PType>().HasKey(c => c.PTypeID);
 
-            modelBuilder.Entity<Payment>().Property(p => p.Amount).HasPrecision(18, 2);
+            modelBuilder.Entity<Payment>()
+                .Property(p => p.Amount)
+                .HasPrecision(18, 2);
+
+            modelBuilder.Entity<Payment>()
+                .HasOne(p => p.PType)
+                .WithMany(t => t.Payments)
+                .HasForeignKey(p => p.PTypeID);
+
             // 複合主鍵：MemberID + CourseID
             modelBuilder.Entity<Reserve>()
                 .HasKey(r => new { r.MemberID, r.CourseID });
@@ -43,10 +51,9 @@ namespace MVC_DBGym.Data
                 .HasForeignKey(r => r.MemberID)
                  .OnDelete(DeleteBehavior.Cascade);
 
-            modelBuilder.Entity<PaymentType>()
-                .HasKey(r => new { r.PaymentID, r.PTypeID });
 
             base.OnModelCreating(modelBuilder);
         }
+    
     }
 }

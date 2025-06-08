@@ -1,0 +1,55 @@
+﻿
+@{
+    ViewData["Title"] = "MyReservations";
+}
+
+<h1>MyReservations</h1>
+
+@model MVC_DBGym.Models.Member
+
+<h1>我的預約課程</h1>
+
+@if (Model?.Reserve != null && Model.Reserve.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>課程名稱</th>
+                <th>付款狀態</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var r in Model.Reserve)
+            {
+                <tr>
+                    <td>@r.Course?.CourseName</td>
+                    <td>@(r.IsPaid ? "已付款" : "未付款")</td>
+                    <td>
+                        @if (!r.IsPaid)
+                        {
+                            <a asp-controller="Pay"
+                               asp-action="CreatePayment"
+                               asp-route-memberId="@r.MemberID"
+                               asp-route-courseId="@r.CourseID"
+                               class="btn btn-primary">付款</a>
+                        }
+                        else
+                        {
+                            <span class="text-success">已完成付款</span>
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>尚無預約課程</p>
+}
+<div>
+    <a asp-controller="DBGymSystem" asp-action="Reserve">返回</a>
+</div>
+
+                              

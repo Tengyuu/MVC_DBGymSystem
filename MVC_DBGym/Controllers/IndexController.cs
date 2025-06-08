@@ -20,9 +20,10 @@ namespace MVC_DBGym.Controllers
                 .ToListAsync();
             return View(course);
         }
-        public IActionResult 教練介紹()
+        public async Task<IActionResult> 教練介紹()
         {
-            return View();
+            var coach = await _context.Coach.ToListAsync();
+            return View(coach);
         }
     }
 }

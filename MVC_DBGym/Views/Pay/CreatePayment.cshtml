@@ -1,0 +1,32 @@
+﻿@using MVC_DBGym.ViewModels
+@model PaymentViewModel
+
+@if (TempData["Errors"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["Errors"]
+    </div>
+}
+
+
+<form asp-controller="Pay" asp-action="CreatePayment" method="post">
+    @Html.AntiForgeryToken()
+
+    <input type="hidden" name="MemberID" value="@Model.MemberID" />
+    <input type="hidden" name="CourseID" value="@Model.CourseID" />
+
+
+    <div class="form-group">
+        <label>金額</label>
+        <input asp-for="Amount" class="form-control" readonly />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="PTypeID">付款方式</label>
+        <select asp-for="PTypeID" asp-items="ViewBag.PTypeList" class="form-control"></select>
+
+        <span asp-validation-for="PTypeID" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">付款</button>
+</form>

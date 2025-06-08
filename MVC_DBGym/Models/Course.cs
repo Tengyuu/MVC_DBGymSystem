@@ -11,6 +11,7 @@ namespace MVC_DBGym.Models
         public int MaxCapacity { get; set; }
         public DateTime CourseDate { get; set; }
         public int CoachID { get; set; }
+        public int Price { get; set; }
         [ValidateNever]
         public Coach Coach { get; set; }
         [ValidateNever]

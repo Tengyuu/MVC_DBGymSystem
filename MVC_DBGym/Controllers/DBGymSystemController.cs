@@ -15,7 +15,11 @@ namespace MVC_DBGym.Controllers
         {
             _context = context;
         }
-
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToAction("Login", "DBGymSystem");
+        }
         public IActionResult Index()
         {
             return View();
@@ -193,7 +197,9 @@ namespace MVC_DBGym.Controllers
                 TempData["Message"] = "Please Login!";
                 return RedirectToAction("Login");
             }
-            var courses = await _context.Course.ToListAsync();
+            var courses = await _context.Course
+                .Include(c=>c.Coach)
+                .ToListAsync();
             int mId = int.Parse(sessionId);
             ViewBag.MemberID = mId;
 
@@ -220,32 +226,38 @@ namespace MVC_DBGym.Controllers
             bool alreadyReserved = course.Reserve.Any(e => e.MemberID == memberId && e.CourseID == courseId);
             int currentCapacity = course.Reserve.Count();
 
+            var alreadyPaid = await _context.Reserve.AnyAsync(e => e.MemberID == memberId && e.CourseID == courseId && e.IsPaid);
 
-
-            if (alreadyReserved)
+            if(alreadyReserved && alreadyPaid)
             {
-                TempData["Enrollmsg"] = $"{course.CourseName} 已經預約了！";
+                TempData["Enrollmsg"] = $"{course.CourseName} 已預約和付款了!";
+            }
+            else if (alreadyReserved)
+            {
+                TempData["Enrollmsg"] = $"{course.CourseName} 已預約過，請先付款。";
             }
             else if (currentCapacity >= course.MaxCapacity)
             {
-                TempData["Enrollmsg"] = $"{course.CourseName} 人數已滿，預約失敗！";
+                TempData["Enrollmsg"] = $"{course.CourseName} 已額滿，預約失敗！";
             }
             else
             {
                 var reserve = new Reserve
                 {
                     MemberID = memberId,
-                    CourseID = courseId
+                    CourseID = courseId,
+                    IsPaid = false
                 };
                 _context.Reserve.Add(reserve);
                 await _context.SaveChangesAsync();
-                TempData["Enrollmsg"] = $"{course.CourseName}預約成功!";
+                TempData["Enrollmsg"] = $"{course.CourseName}預約成功，請盡快付款！";
             }
 
             return RedirectToAction("Reserve");
             //return RedirectToAction("Details","Student",new {id = studentId});
         }
         //退選課程
+        [HttpPost]
         public async Task<IActionResult> DropCourse(int MemberID, int CourseID)
         {
             var Reserve = await _context.Reserve.FirstOrDefaultAsync(e => e.MemberID == MemberID && e.CourseID == CourseID);
@@ -278,6 +290,7 @@ namespace MVC_DBGym.Controllers
             var member = await _context.Member
                 .Include(s => s.Reserve)
                 .ThenInclude(e => e.Course)
+                .ThenInclude(s=>s.Coach)
                 .FirstOrDefaultAsync(m => m.MemberID == id);
             if (member == null)
             {

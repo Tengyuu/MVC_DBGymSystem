@@ -34,7 +34,7 @@
                  
                     <td>
                         <form asp-action="DropCourse" method="post">
-                            <input type="hidden" name="MemberID" value="@Model.MemberID />
+                            <input type="hidden" name="MemberID" value="@Model.MemberID" />
                             <input type="hidden" name="CourseID" value="@enrollment.CourseID" />
                             <button type="submit" class="btn btn-success">退課</button>
                         </form>
@@ -48,4 +48,4 @@ else
 {
     <p>尚未選課。</p>
 }
-<div><a asp-action="Index">← 上一頁</a></div>
+<div><a asp-action="IndexMember">返回</a></div>

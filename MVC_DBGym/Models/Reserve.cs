@@ -12,6 +12,7 @@ namespace MVC_DBGym.Models
         public int CourseID { get; set; }
         public Course Course { get; set; }
 
+        public bool IsPaid { get; set; } = false;
 
     }
 }
