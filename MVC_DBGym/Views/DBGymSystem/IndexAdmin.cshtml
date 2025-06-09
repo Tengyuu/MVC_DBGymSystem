@@ -1,64 +1,88 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "IndexAdmin";
 }
+
 <div class="d-flex justify-content-end mt-3 me-3">
-    <a asp-controller="DBGymSystem" asp-action="Logout" class="btn btn-danger">登出</a>
+    <a asp-controller="DBGymSystem" asp-action="Logout" class="btn logout-btn me-2">登出</a>
+    <a href="@Url.Action("Index")" class="btn logout-btn">回首頁</a>
 </div>
 
-    <title>Admin 控制台</title>
-<div class="main">
-    <div class="admin-container">
-        <h1>Admin 控制台</h1>
-        <a href="@Url.Action("MembersList")" class="admin-button">管理學生</a>
-        <a href="@Url.Action("CoursesList")" class="admin-button">管理課程</a>
-        <a href="@Url.Action("CoachesList")" class="admin-button">管理教練</a>
-        <a href="@Url.Action("Payment","Pay")" class="admin-button">交易紀錄</a>
+<div class="main-container">
+    <div class="admin-dashboard">
+        <h1 class="dashboard-title">Admin 控制台</h1>
+        <div class="button-group">
+            <a href="@Url.Action("MembersList")" class="dashboard-button">管理學生</a>
+            <a href="@Url.Action("CoursesList")" class="dashboard-button">管理課程</a>
+            <a href="@Url.Action("CoachesList")" class="dashboard-button">管理教練</a>
+            <a href="@Url.Action("Payment", "Pay")" class="dashboard-button">交易紀錄</a>
+        </div>
     </div>
 </div>
 
-
-
 <style>
-    .main {
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        background: #f4f4f4;
-        margin: 0;
-        padding: 0;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        height: 100vh;
-        justify-content: center;
+    body {
+        background: radial-gradient(ellipse at 50% 0%, #ff8a0066 0%, #181a1b 60%, #11181c 100%);
+        font-family: 'Segoe UI', 'Microsoft JhengHei', sans-serif;
+        color: #fff;
+        min-height: 100vh;
+        overflow: hidden;
+        position: relative;
     }
 
-    .admin-container {
-        background: #fff;
-        padding: 40px;
-        border-radius: 12px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    .logout-btn {
+        background-color: #ff5252;
+        color: #fff;
+        transition: transform 0.2s;
+    }
+
+        .logout-btn:hover {
+            transform: translateY(-3px);
+            background-color: #ff1744;
+        }
+
+    .main-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 80vh;
+    }
+
+    .admin-dashboard {
+        background-color: rgba(35, 37, 39, 0.9);
+        border-radius: 1rem;
+        padding: 3rem;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.4), 0 4px 12px #ff8a0022;
         text-align: center;
     }
 
-    h1 {
-        margin-bottom: 30px;
-        color: #333;
+    .dashboard-title {
+        font-size: 2.4rem;
+        margin-bottom: 2rem;
+        letter-spacing: 3px;
+        text-shadow: 0 3px 8px #ff8a0033;
     }
 
-    .admin-button {
-        display: inline-block;
-        background-color: #4CAF50;
-        color: white;
-        padding: 15px 30px;
-        margin: 10px;
+    .button-group {
+        display: flex;
+        gap: 1.5rem;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .dashboard-button {
+        background: linear-gradient(90deg, #ff8a00, #ffc107);
+        color: #111;
+        font-weight: bold;
+        padding: 0.8rem 2rem;
+        border-radius: 50px;
+        box-shadow: 0 4px 12px rgba(255, 138, 0, 0.4);
+        transition: transform 0.2s, box-shadow 0.2s;
         text-decoration: none;
-        font-size: 16px;
-        border-radius: 8px;
-        transition: background-color 0.3s ease;
+        font-size: 1.1rem;
     }
 
-        .admin-button:hover {
-            background-color: #45a049;
+        .dashboard-button:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(255, 193, 7, 0.5);
         }
 </style>
-
